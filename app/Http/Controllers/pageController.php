@@ -45,6 +45,17 @@ class pageController extends Controller {
         
         return $views;
     }
+    
+    public function addLike(Request $request) {
+
+        //$views = $request->view+1;
+        //DB::table('products')->where([ ['product_row_id', $request->product_row_id],])->update([ 'product_views' => $views]);
+        $hello = Product::where('product_row_id',$request->post('dataString'))->increment('product_likes');
+//        dd($views);
+        $likes = Product::where('product_row_id',$request->post('dataString'))->first()->product_likes;
+        
+        return $likes;
+    }
 
     /**
      * Show the form for creating a new resource.

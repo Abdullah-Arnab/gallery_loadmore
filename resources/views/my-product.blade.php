@@ -99,6 +99,23 @@ $(document).ready(function () {
             }
         });
     });
+    
+    $('div#product-data').on('click','.likes', function () {
+
+        var dataString = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
+            url: './like-counter',
+            data: {dataString: dataString},
+            success: function (status) {
+                //alert(status);
+                //return false; 
+                $("#like_counter_" + dataString).html(status+' Likes');
+            }
+        });
+    });
 });
 
         </script>

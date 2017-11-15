@@ -14,6 +14,9 @@
         </div>
     </div>
     <!-- Modal -->
+    <form id="myForm" action="{{url("/like-counter")}}" type="POST">{{csrf_field()}}
+        <input type="hidden" name="product_row_id" value="{{$product->product_row_id}}"/>
+    </form>
     <div class="modal fade" id="myModal{{$product->product_row_id}}" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -22,6 +25,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Product {{$product->product_row_id}}</h4>
                     <h6 id="view_counter_{{$product->product_row_id}}">View {{$product->product_views}}</h6>
+                    <button type="button" id="{{$product->product_row_id}}" class="likes btn glyphicon glyphicon-thumbs-up"></button> <span id='like_counter_{{$product->product_row_id}}'>{{$product->product_likes}} Likes</span>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('/public/images/')}}/{{$product->product_image}}" alt="Lights" style="width:100%">

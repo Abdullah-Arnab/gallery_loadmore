@@ -21,3 +21,4 @@ Route::get('/home', 'pageController@home');
 
 Route::get('my-product', 'PageController@myProduct');
 Route::post('view-counter', 'PageController@addView');
+Route::post('like-counter', 'PageController@addLike');
