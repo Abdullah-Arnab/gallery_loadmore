@@ -22,3 +22,11 @@ Route::get('/home', 'pageController@home');
 Route::get('my-product', 'PageController@myProduct');
 Route::post('view-counter', 'PageController@addView');
 Route::post('like-counter', 'PageController@addLike');
+Route::get('image-upload','PageController@imageUpload');
+Route::post('image-upload','PageController@imageUploadPost');
+
+//Intervention
+
+Route::get('resizeImage', 'PageController@resizeImage');
+Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'PageController@resizeImagePost']);
+
