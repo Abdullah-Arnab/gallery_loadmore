@@ -31,8 +31,8 @@
     </head>
     <body>
 <!--<input type="hidden" value="{{csrf_field()}}" id="csrf_token" />-->
-        <div class="container">
-            <div class="col-md-12">
+        <div class="container" style="position:relative">
+            <div class="col-md-12 com-sm-12 col-xs-12 col-lg-12 ">
                 <h1><center>Gallery</center></h1>
                 <ul class="list" id="list">
                     <div id="product-data">

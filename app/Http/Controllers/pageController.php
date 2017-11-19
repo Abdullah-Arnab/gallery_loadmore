@@ -103,7 +103,7 @@ class pageController extends Controller {
     public function resizeImagePost(Request $request)
     {
 	    $this->validate($request, [
-	    	'title' => 'required',
+	    	'product_name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -121,8 +121,8 @@ class pageController extends Controller {
         $image->move($destinationPath, $input['imagename']);
         
         $product = new Product;
-        $product->product_name = 'test';
-        $product->product_price = 100.00;
+        $product->product_name = $request->product_name;
+        $product->product_price = $request->product_price;
         $product->product_image = $input['imagename'];
         $product->save();
        

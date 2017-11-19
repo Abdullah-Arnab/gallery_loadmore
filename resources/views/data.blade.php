@@ -3,15 +3,17 @@
     <form id="myForm" action="{{url("/view-counter")}}" type="POST">{{csrf_field()}}
         <input type="hidden" name="product_row_id" value="{{$product->product_row_id}}"/>
     </form>
-    <div class="col-md-2 product_info">
-        <div class="thumbnail products" id="{{$product->product_row_id}}"> 
-            <a href="#" data-toggle="modal" data-target="#myModal{{$product->product_row_id}}">
-                <img src="{{asset('/public/thumbs/')}}/{{$product->product_image}}" alt="Lights" style="width:100%">
-                <div class="caption">
-                    <p>Product {{$product->product_row_id}}</p>
-                </div>
-            </a>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 product_info" >
+        <div class="thumbnail products" id="{{$product->product_row_id}}" style="height: 25%;"  > 
+            <a href="#" data-toggle="modal" data-target="#myModal{{$product->product_row_id}}" >
+                <img src="{{asset('/public/thumbs/')}}/{{$product->product_image}}" alt="Lights" style="max-width: 100%; display: block; max-height: 80%;" class="img-responsive">
+
+            </a> 
+            <div class="caption">
+                <p style="position:absolute; bottom:10%; ">Product {{$product->product_row_id}}</p>
+            </div>
         </div>
+
     </div>
     <!-- Modal -->
     <form id="myForm" action="{{url("/like-counter")}}" type="POST">{{csrf_field()}}
