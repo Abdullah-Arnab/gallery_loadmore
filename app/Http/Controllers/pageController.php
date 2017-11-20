@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Like;
 use DB;
 use Image;
-
+use Auth;
 class pageController extends Controller {
 
     /**
@@ -40,8 +41,22 @@ class pageController extends Controller {
 
         //$views = $request->view+1;
         //DB::table('products')->where([ ['product_row_id', $request->product_row_id],])->update([ 'product_views' => $views]);
+        
+////        $user['id'] = Auth::user()->id;
+//        $liked = Product::where('product_row_id', 1)->first()->liked_by;
+//        print_r($liked);
+//        
+//        var_dump(json_decode($liked,true));
+//        //print_r($data);
+//        echo "<br>";
+//        die();
+        //$new_data[] = array_push($data,['3']);
+        //$encoded_new[] = json_encode($new_data);
+        
+        //print_r ($new_data);
+//        Product::where('product_row_id', $request->post('dataString'))->update(['delayed'=>$decoded_new]);
+        
         $hello = Product::where('product_row_id', $request->post('dataString'))->increment('product_views');
-//        dd($views);
         $views = Product::where('product_row_id', $request->post('dataString'))->first()->product_views;
 
         return $views;
@@ -51,11 +66,42 @@ class pageController extends Controller {
 
         //$views = $request->view+1;
         //DB::table('products')->where([ ['product_row_id', $request->product_row_id],])->update([ 'product_views' => $views]);
-        $hello = Product::where('product_row_id', $request->post('dataString'))->increment('product_likes');
+        $this->middleware('auth');
+        $data = DB::table('likes')->where([['user_id', Auth::user()->id],['product_id',$request->post('dataString')]])->first();
+        
+        
+        if ($data == ''){
+            $hello = Product::where('product_row_id', $request->post('dataString'))->increment('product_likes');
+            $likes = Product::where('product_row_id', $request->post('dataString'))->first()->product_likes;
+            
+            DB::table('likes')->insert([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->post('dataString'),
+        ]);
+            return $likes;
+        }
+        else {
+            $likes = Product::where('product_row_id', $request->post('dataString'))->first()->product_likes;
+            return $likes;
+        }
+        
+        
+        
 //        dd($views);
-        $likes = Product::where('product_row_id', $request->post('dataString'))->first()->product_likes;
-
-        return $likes;
+        
+        
+        
+        
+        //Eloquent ORM
+//        $like = new Like;
+//        $like->user_id = Auth::user()->id;
+//        $like->product_id = $request->post('dataString');
+//        $like->save();
+//        
+        //Query Builder 
+        
+        
+        
     }
 
     public function imageUpload()
