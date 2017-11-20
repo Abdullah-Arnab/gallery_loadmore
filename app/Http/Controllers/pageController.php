@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Like;
+use App\Comment;
 use DB;
 use Image;
 use Auth;
@@ -17,7 +18,8 @@ class pageController extends Controller {
      */
     public function myProduct(Request $request) {
         $products = Product::paginate(24);
-
+        
+        
         if ($request->ajax()) {
             $view = view('data', compact('products'))->render();
             return response()->json(['html' => $view]);
@@ -57,9 +59,11 @@ class pageController extends Controller {
 //        Product::where('product_row_id', $request->post('dataString'))->update(['delayed'=>$decoded_new]);
         
         $hello = Product::where('product_row_id', $request->post('dataString'))->increment('product_views');
-        $views = Product::where('product_row_id', $request->post('dataString'))->first()->product_views;
-
-        return $views;
+        $data['view'] = Product::where('product_row_id', $request->post('dataString'))->first()->product_views;
+        
+        $data['comments'] = Comment::where('product_id', $request->post('dataString'))->get();
+        return json_encode($data);
+//        return $view;
     }
 
     public function addLike(Request $request) {
@@ -98,8 +102,20 @@ class pageController extends Controller {
 //        $like->product_id = $request->post('dataString');
 //        $like->save();
 //        
-        //Query Builder 
+  
         
+    }
+    
+    public function addComment(Request $request){
+        $this->middleware('auth');
+       
+        
+        
+        $comment = new Comment;
+        $comment->user_id = Auth::user()->id;
+        $comment->product_id = $request->id;
+        $comment->comment = $request->comment;
+        $comment->save();
         
         
     }

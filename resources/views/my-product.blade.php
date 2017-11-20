@@ -12,6 +12,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+        <link rel="stylesheet" href="{{url('/public/css/comment.css')}}">
         <style type="text/css">
             .ajax-load{
                 background: #e1e1e1;
@@ -83,7 +84,7 @@ $(document).ready(function () {
                 });
     }
 
-    $('div#product-data').on('click','.products', function () {
+    $('div#product-data').on('click', '.products', function () {
 
         var dataString = $(this).attr('id');
 
@@ -92,15 +93,30 @@ $(document).ready(function () {
             headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
             url: './view-counter',
             data: {dataString: dataString},
-            success: function (status) {
-                //alert(status);
+            success: function (data) {
+//                alert(data.view);
+                var dataNew = JSON.parse(data);
+                console.log(dataNew);
                 //return false; 
-                $("#view_counter_" + dataString).html('Views ' + status);
+                $("#view_counter_" + dataString).html('Views ' + dataNew.view);
+                var result = '';
+                $("#comment_" + dataString).html("");
+                $.each(dataNew.comments, function (key, value) {
+                    /// do stuff with key and value
+                    
+                    result += "<li>" + value.comment + "</li>";
+                    
+                });
+                $("#comment_" + dataString).append(result);
+                
+//                
+
             }
         });
     });
-    
-    $('div#product-data').on('click','.likes', function () {
+
+    //Likes
+    $('div#product-data').on('click', '.likes', function () {
 
         var dataString = $(this).attr('id');
 
@@ -112,10 +128,32 @@ $(document).ready(function () {
             success: function (status) {
                 //alert(status);
                 //return false; 
-                $("#like_counter_" + dataString).html(status+' Likes');
+                $("#like_counter_" + dataString).html(status + ' Likes');
             }
         });
     });
+
+    //Comment
+//    $('div#product-data').on('click','.comments', function () {
+//
+//        var id = $(this).attr('id');
+//        var comment = $('#comment-input').val();
+//        
+//        var data = 'id=' + id & 'comment=' + comment;
+//        
+//
+//        $.ajax({
+//            type: "POST",
+//            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
+//            url: './add-comment',
+//            data: data,
+//            success: function (status) {
+//                alert(status);
+//                //return false; 
+////                $("#like_counter_" + dataString).html(status+' Likes');
+//            }
+//        });
+//    });
 });
 
         </script>

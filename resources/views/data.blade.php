@@ -26,18 +26,68 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Product {{$product->product_row_id}}</h4>
+
+                    <!--                    Views Display-->
                     <h6 id="view_counter_{{$product->product_row_id}}">View {{$product->product_views}}</h6>
+
+                    <!--                    Likes Button-->
                     <button type="button" id="{{$product->product_row_id}}" class="likes btn glyphicon glyphicon-thumbs-up"></button> <span id='like_counter_{{$product->product_row_id}}'>{{$product->product_likes}} Likes</span>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('/public/images/')}}/{{$product->product_image}}" alt="Lights" style="width:100%">
                 </div>
+
+                <!-- Comment-Box Start-->
+
+                <div class="detailBox container">
+                    <div class="titleBox">
+                        <label>Comment Box</label>
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="commentBox">
+
+                        <p class="taskDescription">See User Comments About This Product</p>
+                    </div>
+                    <div class="actionBox">
+                        <ul class="commentList">
+                            
+                            <li>
+                                <!--                                <div class="commenterImage">
+                                                                    <img src="http://placekitten.com/50/50" />
+                                                                </div>-->
+                                <p id="comment_id_{{$product->product_row_id}}"><b></b></p>
+                                <div class="commentText">
+                                    <p id="comment_{{$product->product_row_id}}"></p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                </div>
+                            </li>
+
+
+                            
+
+                        </ul>
+                        <form class="form-inline" action="{{url('/add-comment')}}" method="POST">{{csrf_field()}}
+                            <div class="form-group">
+                                <input id="comment-input" class="form-control" type="text" placeholder="Your comments" name="comment" />
+                            </div>
+                            <input class="form-control" type="hidden" placeholder="Your comments" value="{{$product->product_row_id}}" name="id" />
+                            <div class="form-group">
+                                <button class="comments btn btn-default" type="submit">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Comment-Box End-->
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
         </div>
+
     </div>
+
 </li>
 @endforeach
