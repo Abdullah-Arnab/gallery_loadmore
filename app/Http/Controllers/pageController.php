@@ -61,8 +61,15 @@ class pageController extends Controller {
         $hello = Product::where('product_row_id', $request->post('dataString'))->increment('product_views');
         $data['view'] = Product::where('product_row_id', $request->post('dataString'))->first()->product_views;
         
-        $data['comments'] = Comment::where('product_id', $request->post('dataString'))->get();
-        return json_encode($data);
+//        $data['comments'] = Comment::where('product_id', $request->post('dataString'))->get();
+//        $data['name'] = User::where('user_id',Auth::user()->id )->first();
+        $data['names'] = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->select('users.name','comments.comment', 'comments.created_at')
+            ->where('comments.product_id',$request->post('dataString'))
+            ->get();
+        
+        return $data;
 //        return $view;
     }
 
@@ -117,6 +124,7 @@ class pageController extends Controller {
         $comment->comment = $request->comment;
         $comment->save();
         
+        return redirect("/my-product");
         
     }
 

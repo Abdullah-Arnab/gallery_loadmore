@@ -49,45 +49,72 @@
                         <p class="taskDescription">See User Comments About This Product</p>
                     </div>
                     <div class="actionBox">
-                        <ul class="commentList">
+                                                <ul class="commentList">
+                        
+                                                    <li>
+<!--                                                        <div  id="id_{{$product->product_row_id}}">
+                        
+                                                        </div>-->
+                        
+                                                        <div  id="comment_{{$product->product_row_id}}">
+                        
+                                                        </div>
+                        
+                        
+                        
+                                                    </li>
+                        
+                        
+                        
+                        
+                                                </ul>
+
+<!--                        <table style="float: left; border-collapse:collapse; " border="none" >
+                            <tr id="id_{{$product->product_row_id}}">
+                                
+                                
+                            </tr>
                             
-                            <li>
-                                <!--                                <div class="commenterImage">
-                                                                    <img src="http://placekitten.com/50/50" />
-                                                                </div>-->
-                                <p id="comment_id_{{$product->product_row_id}}"><b></b></p>
-                                <div class="commentText">
-                                    <p id="comment_{{$product->product_row_id}}"></p> <span class="date sub-text">on March 5th, 2014</span>
+                        </table>
+
+
+                        <table style="border-collapse:collapse; " border="none">
+                            <tr id="comment_{{$product->product_row_id}}">
+                                
+                                      
+                                
+                            </tr>
+                            
+                            
+                        </table>-->
+
+                        
+
+                                <form class="form-inline" role="form" action="{{url('/add-comment')}}" method="POST">{{csrf_field()}}
+                                    <div class="form-group">
+                                        <input id="comment-input" class="form-control" type="text" placeholder="Your comments" name="comment" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input style="width: 100%" class="form-control" type="hidden" placeholder="Your comments" value="{{$product->product_row_id}}" name="id" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="comments btn btn-default" type="submit">Add</button>
+                                    </div>
+                                </form>
 
                                 </div>
-                            </li>
+                                </div>
 
+                                <!-- Comment-Box End-->
 
-                            
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
 
-                        </ul>
-                        <form class="form-inline" action="{{url('/add-comment')}}" method="POST">{{csrf_field()}}
-                            <div class="form-group">
-                                <input id="comment-input" class="form-control" type="text" placeholder="Your comments" name="comment" />
-                            </div>
-                            <input class="form-control" type="hidden" placeholder="Your comments" value="{{$product->product_row_id}}" name="id" />
-                            <div class="form-group">
-                                <button class="comments btn btn-default" type="submit">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                                </div>
 
-                <!-- Comment-Box End-->
+                                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</li>
-@endforeach
+                                </li>
+                                @endforeach

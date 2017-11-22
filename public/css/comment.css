@@ -18,11 +18,9 @@
     border-top:1px dotted #bbb;
 }
 .commentBox .form-group:first-child, .actionBox .form-group:first-child {
-    width:80%;
+    width:100%;
 }
-.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
-    width:18%;
-}
+
 .actionBox .form-group * {
     width:100%;
 }

@@ -95,18 +95,28 @@ $(document).ready(function () {
             data: {dataString: dataString},
             success: function (data) {
 //                alert(data.view);
-                var dataNew = JSON.parse(data);
+                var dataNew = data;
                 console.log(dataNew);
                 //return false; 
                 $("#view_counter_" + dataString).html('Views ' + dataNew.view);
                 var result = '';
+                var result1 = '';
                 $("#comment_" + dataString).html("");
-                $.each(dataNew.comments, function (key, value) {
+                $.each(dataNew.names, function (key, value) {
+                    
+                   
                     /// do stuff with key and value
+                  
+                    result += "<li><div><b>" + value.name + "</b></div> <div>" + value.comment + "</div><div> <h6>" + value.created_at + "</h6></div></li>" 
                     
-                    result += "<li>" + value.comment + "</li>";
-                    
+                  
                 });
+                 
+                 
+//                $.each(dataNew.names, function (key1, value1) {
+//                    result1 += "<tr style='height: 200px'><td>" + value1.name + "</td></tr>";
+//                 });
+//                 $("#id_" + dataString).append(result1);
                 $("#comment_" + dataString).append(result);
                 
 //                
