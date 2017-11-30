@@ -20,6 +20,7 @@ Route::get('/', 'pageController@index');
 Route::get('/home', 'pageController@home');
 
 Route::get('my-product', 'PageController@myProduct');
+Route::get('product', 'PageController@product');
 Route::post('view-counter', 'PageController@addView');
 Route::post('like-counter', 'PageController@addLike');
 Route::post('add-comment', 'PageController@addComment');

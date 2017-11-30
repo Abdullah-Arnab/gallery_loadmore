@@ -27,6 +27,17 @@ class pageController extends Controller {
 
         return view('my-product', compact('products'));
     }
+    public function product(Request $request) {
+        $products = Product::paginate(36);
+        
+        
+        if ($request->ajax()) {
+            $view = view('data', compact('products'))->render();
+            return response()->json(['html' => $view]);
+        }
+
+        return view('product', compact('products'));
+    }
 
     public function index() {
         $data['products'] = Product::get();

@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <title>Laravel infinite scroll pagination</title>
@@ -39,8 +38,6 @@
                     <div id="product-data">
                         @include('data')
                     </div>
-
-
                 </ul>
 
             </div>
@@ -58,7 +55,6 @@ $(document).ready(function () {
             loadMoreData(page);
         }
     });
-
     function loadMoreData(page) {
         $.ajax(
                 {
@@ -83,18 +79,15 @@ $(document).ready(function () {
                     alert('server not responding...');
                 });
     }
-
     $('div#product-data').on('click', '.products', function () {
-
         var dataString = $(this).attr('id');
-
         $.ajax({
             type: "POST",
             headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
             url: './view-counter',
             data: {dataString: dataString},
             success: function (data) {
-//                alert(data.view);
+                //                alert(data.view);
                 var dataNew = data;
                 console.log(dataNew);
                 //return false; 
@@ -103,33 +96,29 @@ $(document).ready(function () {
                 var result1 = '';
                 $("#comment_" + dataString).html("");
                 $.each(dataNew.names, function (key, value) {
-                    
-                   
-                    /// do stuff with key and value
-                  
-                    result += "<li><div><b>" + value.name + "</b></div> <div>" + value.comment + "</div><div> <h6>" + value.created_at + "</h6></div></li>" 
-                    
-                  
-                });
-                 
-                 
-//                $.each(dataNew.names, function (key1, value1) {
-//                    result1 += "<tr style='height: 200px'><td>" + value1.name + "</td></tr>";
-//                 });
-//                 $("#id_" + dataString).append(result1);
-                $("#comment_" + dataString).append(result);
-                
-//                
 
+
+                    /// do stuff with key and value
+
+                    result += "<li><b>" + value.name + "</b> " + value.comment + "<br/> <h6><i>" + value.created_at + "</i></h6></li>"
+
+
+                });
+
+
+                //                $.each(dataNew.names, function (key1, value1) {
+                //                    result1 += "<tr style='height: 200px'><td>" + value1.name + "</td></tr>";
+                //                 });
+                //                 $("#id_" + dataString).append(result1);
+                $("#comment_" + dataString).append(result);
+
+                //                
             }
         });
     });
-
     //Likes
     $('div#product-data').on('click', '.likes', function () {
-
         var dataString = $(this).attr('id');
-
         $.ajax({
             type: "POST",
             headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
@@ -142,30 +131,50 @@ $(document).ready(function () {
             }
         });
     });
+    
+    $('div#product-data').on('click',".next_button",function(){
+        
+        var this_modal = $(this).parent('div').parent('div').parent('div').parent('div').attr('id');
+        var next_modal = $(this).parent('div').parent('div').parent('div').parent('div').parent('li').next('li').find('div.modal').attr('id');
+        $("#"+this_modal).modal('hide');
+        $("#"+next_modal).modal('show');
+    });
+    
+    $('div#product-data').on('click',".prev_button",function(){
+        
+        var this_modal = $(this).parent('div').parent('div').parent('div').parent('div').attr('id');
+        var prev_modal = $(this).parent('div').parent('div').parent('div').parent('div').parent('li').prev('li').find('div.modal').attr('id');
+        $("#"+this_modal).modal('hide');
+        $("#"+prev_modal).modal('show');
+    });
 
+//                $(".product_info").on('click',function(){
+//                    alert($(this).parent('li').next('li').find('div.modal').attr('id');
+//                });
+
+//                
     //Comment
-//    $('div#product-data').on('click','.comments', function () {
-//
-//        var id = $(this).attr('id');
-//        var comment = $('#comment-input').val();
-//        
-//        var data = 'id=' + id & 'comment=' + comment;
-//        
-//
-//        $.ajax({
-//            type: "POST",
-//            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
-//            url: './add-comment',
-//            data: data,
-//            success: function (status) {
-//                alert(status);
-//                //return false; 
-////                $("#like_counter_" + dataString).html(status+' Likes');
-//            }
-//        });
-//    });
+    //    $('div#product-data').on('click','.comments', function () {
+    //
+    //        var id = $(this).attr('id');
+    //        var comment = $('#comment-input').val();
+    //        
+    //        var data = 'id=' + id & 'comment=' + comment;
+    //        
+    //
+    //        $.ajax({
+    //            type: "POST",
+    //            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')},
+    //            url: './add-comment',
+    //            data: data,
+    //            success: function (status) {
+    //                alert(status);
+    //                //return false; 
+    ////                $("#like_counter_" + dataString).html(status+' Likes');
+    //            }
+    //        });
+    //    });
 });
-
         </script>
 
     </body>
