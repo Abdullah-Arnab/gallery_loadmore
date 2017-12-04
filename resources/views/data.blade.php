@@ -16,7 +16,7 @@
     </div>
     <!-- Modal -->
     <form id="myForm" action="{{url("/like-counter")}}" type="POST">{{csrf_field()}}
-        <input type="hidden" name="product_row_id" value="{{$product->product_row_id}}"/>
+        <input class="pid" type="hidden" name="product_row_id" value="{{$product->product_row_id}}"/>
     </form>
     <div class="modal animated fadeIn" id="myModal{{$product->product_row_id}}" role="dialog">
         <div class="modal-dialog">
