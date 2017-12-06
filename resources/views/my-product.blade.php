@@ -48,6 +48,7 @@
         </div>
         <script type="text/javascript">
 $(document).ready(function () {
+
     var page = 1;
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -165,7 +166,7 @@ $(document).ready(function () {
 
 
     });
-    
+
     //prev
     $('div#product-data').on('click', ".prev_button", function () {
 
@@ -197,13 +198,72 @@ $(document).ready(function () {
 
 
     });
-    
-    
+
+
+    //test
+
+
+
     //Right Key press
+
+
+    var modal_id = 0;
+    var next_modal = 0;
+
+    $('div#product-data').on('keyup','div.product_info', function (event) {
+
+        if (event.keyCode === 39) {
+            //var modal_id = $(this).parent('li').children("div[class*='fadeIn in']").attr('id');
+            if (modal_id === 0)
+            {
+                modal_id = "myModal" + $(this).find('div').attr('id');
+            }
+            next_modal = $("#" + modal_id).parent('li').next('li').find('div.modal').attr('id');
+//                alert(modal_id);
+//                alert(next_modal);
+            ////                console.log(next_modal);
+//                console.log(next_modal);
+
+//                alert($('#next-button' + modal_id).attr('id'));
+//                alert(next_modal);
+//                $('#next-button' + modal_id).click();
+            $("#" + modal_id).modal('hide');
+
+            $("#" + next_modal).modal('show');
+            //return false;
+        }
+        
+        if (event.keyCode === 37) {
+            //var modal_id = $(this).parent('li').children("div[class*='fadeIn in']").attr('id');
+            if (modal_id === 0)
+            {
+                modal_id = "myModal" + $(this).find('div').attr('id');
+            }
+            next_modal = $("#" + modal_id).parent('li').prev('li').find('div.modal').attr('id');
+//                alert(modal_id);
+//                alert(next_modal);
+            ////                console.log(next_modal);
+//                console.log(next_modal);
+
+//                alert($('#next-button' + modal_id).attr('id'));
+//                alert(next_modal);
+//                $('#next-button' + modal_id).click();
+            $("#" + modal_id).modal('hide');
+
+            $("#" + next_modal).modal('show');
+            //return false;
+        }
+
+        modal_id = next_modal;
+        
+
+
+    });
     
-    
-    
-    
+
+
+
+
 
 //                $(".product_info").on('click',function(){
 //                    alert($(this).parent('li').next('li').find('div.modal').attr('id');

@@ -33,9 +33,9 @@
 
                     <!--                    Likes Button-->
                     <button type="button" id="{{$product->product_row_id}}" class="likes btn glyphicon glyphicon-thumbs-up"></button> <span id='like_counter_{{$product->product_row_id}}'>{{$product->product_likes}} Likes</span>
-
-                    <button class="prev_button" type="button">Prev</button>
-                    <button class="next_button" type="button">Next</button>
+                    
+                    <button id="prev-button" class="prev_button" type="button">Prev</button>
+                    <button id="next-button" class="next_button" type="button">Next</button>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('/public/images/')}}/{{$product->product_image}}" alt="Lights" style="width:100%">
